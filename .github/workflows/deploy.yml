@@ -1,7 +1,8 @@
 name: Node App CI/CD
 
 on:
-  push: [develop, master]
+  push:
+    branches: [ develop, master ]
 
   workflow_dispatch:
 
