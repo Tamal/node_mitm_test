@@ -20,8 +20,9 @@ jobs:
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
       - name: Install proxy & configure certificates
         run: |
-          apt install python3-pip
-          pip3 install mitmproxy
+          sudo apt update
+          sudo apt install python3-pip
+          sudo pip3 install mitmproxy
 
       - name: Build, tag, and push image
         env:
