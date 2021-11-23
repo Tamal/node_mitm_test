@@ -1,0 +1,25 @@
+name: Node App CI/CD
+
+on:
+  push: [develop, master]
+
+  workflow_dispatch:
+
+job:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Set environment variables
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+      - name: Build, tag, and push image
+        env:
+          IMAGE_TAG: "${{ env.ENVIRONMENT }}-${{ github.sha }}" 
+        run: |
+          echo "Building for git branch: $GIT_BRANCH"
+          docker build --no-cache -t NODE_APP:$IMAGE_TAG .
