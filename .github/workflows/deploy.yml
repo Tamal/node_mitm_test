@@ -23,4 +23,4 @@ jobs:
           IMAGE_TAG: "${{ env.ENVIRONMENT }}-${{ github.sha }}" 
         run: |
           echo "Building for git branch: $GIT_BRANCH"
-          docker build --no-cache -t NODE_APP:$IMAGE_TAG .
+          docker build --no-cache -t mitm_proxy_app:$IMAGE_TAG .
