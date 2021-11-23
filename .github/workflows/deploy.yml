@@ -19,9 +19,10 @@ jobs:
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
       - name: Install proxy & configure certificates
-        run:|
+        run: |
           apt install python3-pip
           pip3 install mitmproxy
+
       - name: Build, tag, and push image
         env:
           IMAGE_TAG: "${{ github.sha }}" 
