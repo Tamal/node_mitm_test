@@ -20,7 +20,7 @@ jobs:
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
       - name: Build, tag, and push image
         env:
-          IMAGE_TAG: "${{ env.ENVIRONMENT }}-${{ github.sha }}" 
+          IMAGE_TAG: "${{ github.sha }}" 
         run: |
           echo "Building for git branch: $GIT_BRANCH"
           docker build --no-cache -t mitm_proxy_app:$IMAGE_TAG .
