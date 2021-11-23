@@ -22,7 +22,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install python3-pip
-          sudo pip3 install mitmproxy
+          echo "Installing mitmproxy using pip................."
+          pip3 install mitmproxy
+          mitmproxy
 
       - name: Build, tag, and push image
         env:
