@@ -7,7 +7,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', async (req, res) => {
+  console.log('Source code updated!!!');
   res.send({ message: 'Welcome to enrich client API!' });
+});
+
+app.get('/hello', async (req, res) => {
+  res.send({ message: 'hello' });
 });
 
 const NODE_ENV = process.env.NODE_ENV || 'development';

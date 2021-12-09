@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  node-mitm:
+    build: ./
+    ports:
+      - 8089:3002
+    volumes:
+      - .:/app

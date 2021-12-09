@@ -18,16 +18,19 @@ jobs:
           # Short name for current branch. For PRs, use target branch (base ref)
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-      - name: Install mitmproxy
+      - name: Install proxy service
         run: |
           sudo apt update
-          sudo apt install python3-pip
-          echo "Installing mitmproxy using pip................."
-          pip3 install mitmproxy
+          wget https://github.com/projectdiscovery/proxify/releases/download/v0.0.5/proxify_0.0.5_linux_amd64.zip
+          unzip proxify_0.0.5_linux_amd64.zip
+          # sudo apt install python3-pip
+          # echo "Installing mitmproxy using pip................."
+          # pip3 install mitmproxy
       - name: Run mitmproxy
         shell: 'script -q -e -c "bash {0}"'
         run: |
-          mitmproxy
+          proxify
+          # mitmproxy
 
       - name: Build, tag, and push image
         env:
