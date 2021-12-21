@@ -46,7 +46,7 @@ jobs:
           # proxify
           # mitmproxy
           docker images
-          docker run --rm -it -p 8080:8080 mitmproxy/mitmproxy
+          docker run -d --rm -v -it -p 8080:8080 mitmproxy/mitmproxy
           docker ps | grep mitmproxy | cut -c 1-12
 
       - name: Build, tag, and push image
