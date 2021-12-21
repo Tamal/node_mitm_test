@@ -47,7 +47,9 @@ jobs:
           # mitmproxy
           docker images
           docker run -d --rm -v -it -p 8080:8080 mitmproxy/mitmproxy
-          docker ps | grep mitmproxy | cut -c 1-12
+          docker ps
+          CONTAINER_ID = $(docker ps | grep mitmproxy | cut -c 1-12)
+          echo "Container ID: $CONTAINER_ID"
 
       - name: Build, tag, and push image
         env:
