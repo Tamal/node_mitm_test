@@ -53,8 +53,8 @@ jobs:
           echo "Container ID: $CONTAINER_ID"
           docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy/ ./
           ls -ahl
-          echo "My current dir: $PWD"
-          DIR=$(PWD)
+          DIR=$(pwd)
+          echo "My current dir: $DIR"
           echo "Showing contents of $DIR/.mitmproxy"
           ls -ahl $DIR/.mitmproxy/ 
           cat $DIR/.mitmproxy/mitmproxy-ca-cert.pem 
