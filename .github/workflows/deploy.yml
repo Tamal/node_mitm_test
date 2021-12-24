@@ -23,6 +23,7 @@ jobs:
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
           echo "HTTP_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
+          echo "HTTPS_PROXY=https://127.0.0.1:8080" >> $GITHUB_ENV
       
       - name: Install proxy service
         run: |
@@ -50,7 +51,7 @@ jobs:
           docker ps
           CONTAINER_ID=$(docker ps | grep mitmproxy | cut -c 1-12)
           echo "Container ID: $CONTAINER_ID"
-          docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy/** ./
+          docker cp -a $CONTAINER_ID:/home/mitmproxy/.mitmproxy ./
           ls -l
 
       - name: Build, tag, and push image
