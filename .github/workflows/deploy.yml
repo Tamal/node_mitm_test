@@ -50,6 +50,8 @@ jobs:
           docker ps
           CONTAINER_ID=$(docker ps | grep mitmproxy | cut -c 1-12)
           echo "Container ID: $CONTAINER_ID"
+          docker cp $CONTAINER_ID:/.mitmproxy/** ./
+          ls -l
 
       - name: Build, tag, and push image
         env:
