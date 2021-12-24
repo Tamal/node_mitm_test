@@ -54,7 +54,7 @@ jobs:
           echo "Container ID: $CONTAINER_ID"
           echo "My current dir: $DIR"
           echo "Executing docker cp..."
-          docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy/. $DIR
+          docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy .
           ls -ahl
           echo "Showing contents of $DIR/.mitmproxy"
           ls -ahl $DIR/.mitmproxy/ 
