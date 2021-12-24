@@ -46,15 +46,16 @@ jobs:
         run: |
           # proxify
           # mitmproxy
-          docker images
+          # docker images
           docker run -d --rm -v -it -p 8080:8080 mitmproxy/mitmproxy
           docker ps
           CONTAINER_ID=$(docker ps | grep mitmproxy | cut -c 1-12)
-          echo "Container ID: $CONTAINER_ID"
-          docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy/ ./
-          ls -ahl
           DIR=$(pwd)
+          echo "Container ID: $CONTAINER_ID"
           echo "My current dir: $DIR"
+          echo "Executing docker cp..."
+          docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy/ $DIR
+          ls -ahl
           echo "Showing contents of $DIR/.mitmproxy"
           ls -ahl $DIR/.mitmproxy/ 
           cat $DIR/.mitmproxy/mitmproxy-ca-cert.pem 
