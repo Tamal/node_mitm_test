@@ -54,9 +54,10 @@ jobs:
           docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy/ ./
           ls -ahl
           echo "My current dir: $PWD"
-          echo "Showing contents of .mitmproxy"
-          ls -ahl .mitmproxy/ 
-          cat .mitmproxy/mitmproxy-ca-cert.pem 
+          DIR=$(PWD)
+          echo "Showing contents of $DIR/.mitmproxy"
+          ls -ahl $DIR/.mitmproxy/ 
+          cat $DIR/.mitmproxy/mitmproxy-ca-cert.pem 
 
       - name: Build, tag, and push image
         env:
