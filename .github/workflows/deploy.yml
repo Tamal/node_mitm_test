@@ -23,7 +23,7 @@ jobs:
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
           echo "HTTP_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
-          echo "HTTPS_PROXY=https://127.0.0.1:8080" >> $GITHUB_ENV
+          echo "HTTPS_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
       
       - name: Install proxy service
         run: |
@@ -47,14 +47,11 @@ jobs:
           # proxify
           # mitmproxy
           # docker images
-          mkdir -p ~/.mitmproxy
-          # docker network create br1 --attachable --driver bridge --subnet=172.28.5.0/24 --gateway=172.28.5.1
           docker run -d --rm -it --name mitmproxy_test -v ~/.mitmproxy:/home/mitmproxy/.mitmproxy -p 8080:8080 mitmproxy/mitmproxy mitmdump
           until [ "`docker inspect -f {{.State.Running}} mitmproxy_test`"=="true" ]; do
             echo "Waiting for completion of mitmproxy_test"
             sleep 1.0;
           done;
-          sleep 10.0;
           docker ps
           # CONTAINER_ID=$(docker ps | grep mitmproxy | cut -c 1-12)
           # DIR=$(pwd)
@@ -67,7 +64,10 @@ jobs:
           # ls -ahl 
           echo "Showing contents of ~/.mitmproxy"
           ls -ahl ~/.mitmproxy
+          echo "Print mitmproxy-ca-cert.pem"
           cat ~/.mitmproxy/mitmproxy-ca-cert.pem
+          npm config set strict-ssl false
+          npm config set https-proxy http://127.0.0.1:8080
 
       - name: Build, tag, and push image
         env:
