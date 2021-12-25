@@ -15,6 +15,10 @@ jobs:
         image: mitmproxy/mitmproxy
 
     steps:
+      - name: Get Public IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - name: Set environment variables
@@ -22,8 +26,8 @@ jobs:
           # Short name for current branch. For PRs, use target branch (base ref)
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-          echo "HTTP_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
-          echo "HTTPS_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
+          echo "HTTP_PROXY=http://${{ steps.ip.outputs.ipv4 }}:8080" >> $GITHUB_ENV
+          echo "HTTPS_PROXY=http://${{ steps.ip.outputs.ipv4 }}:8080" >> $GITHUB_ENV
       
       - name: Install proxy service
         run: |
