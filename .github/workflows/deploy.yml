@@ -53,7 +53,8 @@ jobs:
           DIR=$(pwd)
           echo "Container ID: $CONTAINER_ID"
           echo "My current dir: $DIR"
-          docker exec -it $CONTAINER_ID ls -ahl home
+          echo "Show contents of mitmproxy container: /home/mitmproxy/.mitmproxy"
+          docker exec -it $CONTAINER_ID ls -ahl /home/mitmproxy/.mitmproxy
           echo "Executing docker cp..."
           docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy ./mitm
           ls -ahl
