@@ -3,6 +3,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 # Set proxy before calling `npm ci`
 RUN npm config set strict-ssl false
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
 # RUN npm config set https-proxy https://127.0.0.1:8080
 
 RUN npm ci
