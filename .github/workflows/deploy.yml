@@ -23,7 +23,7 @@ jobs:
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
           echo "HTTP_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
-          echo "HTTPS_PROXY=https://127.0.0.1:8080" >> $GITHUB_ENV
+          echo "HTTPS_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
       
       - name: Install proxy service
         run: |
@@ -69,7 +69,7 @@ jobs:
           echo "Print mitmproxy-ca-cert.pem"
           cat ~/.mitmproxy/mitmproxy-ca-cert.pem
           # echo "Testing with curl using proxy"
-          # curl --proxy 127.0.0.1:8080 --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem "https://gorest.co.in/public/v1/users" | jq 
+          curl --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem https://jsonplaceholder.typicode.com/todos/1 | jq 
           # echo "Set npm config"
           # npm config set strict-ssl false
           # npm config set https-proxy http://127.0.0.1:8080
