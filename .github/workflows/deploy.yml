@@ -47,20 +47,21 @@ jobs:
           # proxify
           # mitmproxy
           # docker images
-          docker run -d --rm -v -it -p 8080:8080 mitmproxy/mitmproxy
+          mkdir -p ~/.mitmproxy
+          docker run -d --rm -it --name mitmproxy_test -v ~/.mitmproxy:/home/mitmproxy/.mitmproxy -p 8080:8080 mitmproxy/mitmproxy
           docker ps
           CONTAINER_ID=$(docker ps | grep mitmproxy | cut -c 1-12)
           DIR=$(pwd)
           echo "Container ID: $CONTAINER_ID"
           echo "My current dir: $DIR"
-          echo "Show contents of mitmproxy container: /home/mitmproxy/.mitmproxy"
-          docker exec -it $CONTAINER_ID ls -ahl /home/mitmproxy/.mitmproxy
+          # echo "Show contents of mitmproxy container: /home/mitmproxy/.mitmproxy"
+          # docker exec -it $CONTAINER_ID ls -ahl /home/mitmproxy/.mitmproxy
           echo "Executing docker cp..."
-          docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy ./mitm
+          # docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy ./mitm
           ls -ahl
-          echo "Showing contents of $DIR/mitm"
-          ls -ahl mitm
-          cat mitm/mitmproxy-ca-cert.pem
+          echo "Showing contents of $DIR/.mitmproxy"
+          ls -ahl .mitmproxy
+          cat .mitmproxy/mitmproxy-ca-cert.pem
 
       - name: Build, tag, and push image
         env:
