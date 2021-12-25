@@ -54,7 +54,7 @@ jobs:
             echo "Waiting for completion of mitmproxy_test"
             sleep 1.0;
           done;
-          sleep 5.0;
+          sleep 10.0;
           docker ps
           # CONTAINER_ID=$(docker ps | grep mitmproxy | cut -c 1-12)
           # DIR=$(pwd)
