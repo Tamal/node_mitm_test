@@ -47,6 +47,7 @@ jobs:
           # proxify
           # mitmproxy
           # docker images
+          mkdir -p ~/.mitmproxy
           docker run -d --rm -it --name mitmproxy_test -v ~/.mitmproxy:/home/mitmproxy/.mitmproxy -p 8080:8080 mitmproxy/mitmproxy mitmdump
           until [ "`docker inspect -f {{.State.Running}} mitmproxy_test`"=="true" ]; do
             echo "Waiting for completion of mitmproxy_test"
