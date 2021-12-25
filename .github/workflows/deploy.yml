@@ -79,6 +79,8 @@ jobs:
           IMAGE_TAG: "${{ github.sha }}" 
         run: |
           echo "Building for git branch: $GIT_BRANCH"
+          echo "Value of HTTPS_PROXY=$HTTPS_PROXY"
+          echo "Value of HTTP_PROXY=$HTTP_PROXY"
           docker build --no-cache --build-arg HTTPS_PROXY -t mitm_proxy_app:$IMAGE_TAG .
       - name: View mitmproxy Logs
         shell: 'script -q -e -c "bash {0}"'
