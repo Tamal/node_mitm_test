@@ -56,8 +56,9 @@ jobs:
           echo "Executing docker cp..."
           docker cp $CONTAINER_ID:/home/mitmproxy/.mitmproxy ./mitm
           ls -ahl
-          echo "Showing contents of $DIR/.mitmproxy"
+          echo "Showing contents of $DIR/mitm"
           ls -ahl mitm
+          cat Dockerfile
           # cat mitm/mitmproxy-ca-cert.pem
 
       - name: Build, tag, and push image
