@@ -75,3 +75,6 @@ jobs:
         run: |
           echo "Building for git branch: $GIT_BRANCH"
           docker build --no-cache -t mitm_proxy_app:$IMAGE_TAG .
+      - name: View mitmproxy Logs
+        run: |
+          docker logs mitmproxy_test
