@@ -6,7 +6,8 @@ COPY package.json package-lock.json ./
 # RUN npm config set https-proxy http://127.0.0.1:8080
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
-
+ARG CA
+RUN npm config set ca ${CA}
 RUN npm ci
 
 FROM node:14-alpine
