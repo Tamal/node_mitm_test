@@ -73,8 +73,8 @@ jobs:
           echo "Showing contents of ~/.mitmproxy"
           ls -ahl ~/.mitmproxy
           echo "Print mitmproxy-ca-cert.pem"
-          CA=$(cat ~/.mitmproxy/mitmproxy-ca-cert.pem)
-          echo "CA=$CA" >> $GITHUB_ENV
+          CERT=$(cat ~/.mitmproxy/mitmproxy-ca-cert.pem)
+          echo "CA=$CERT" >> $GITHUB_ENV
           # echo "Testing with curl using proxy"
           curl --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem https://jsonplaceholder.typicode.com/todos/1 | jq 
           # echo "Set npm config"
