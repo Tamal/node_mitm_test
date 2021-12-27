@@ -78,7 +78,6 @@ jobs:
           echo 'CA<<EOF' >> $GITHUB_ENV
           echo $CA >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-          echo "CA=$CERT" >> $GITHUB_ENV
           # echo "Testing with curl using proxy"
           curl --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem https://jsonplaceholder.typicode.com/todos/1 | jq 
           # echo "Set npm config"
