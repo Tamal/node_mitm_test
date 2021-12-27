@@ -7,6 +7,7 @@ COPY package.json package-lock.json ./
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 ARG CA
+RUN npm config set strict-ssl false
 RUN npm config set ca ${CA}
 RUN npm ci
 
