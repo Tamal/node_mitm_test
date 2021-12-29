@@ -95,7 +95,7 @@ jobs:
           echo "Value of HTTPS_PROXY=$HTTPS_PROXY"
           echo "Value of HTTP_PROXY=$HTTP_PROXY"
           echo "Value of CA=$CA"
-          docker build --no-cache --build-arg HTTPS_PROXY=$HTTPS_PROXY --build-arg HTTP_PROXY=$HTTP_PROXY --build-arg CA="$CA" -t mitm_proxy_app:$IMAGE_TAG .
+          docker build --no-cache --build-arg HTTPS_PROXY=$HTTPS_PROXY --build-arg HTTP_PROXY=$HTTP_PROXY -t mitm_proxy_app:$IMAGE_TAG .
       - name: View mitmproxy Logs
         shell: 'script -q -e -c "bash {0}"'
         run: |
