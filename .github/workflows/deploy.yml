@@ -26,8 +26,11 @@ jobs:
           # Short name for current branch. For PRs, use target branch (base ref)
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-          echo "HTTP_PROXY=http://${{ steps.ip.outputs.ipv4 }}:8080" >> $GITHUB_ENV
-          echo "HTTPS_PROXY=http://${{ steps.ip.outputs.ipv4 }}:8080" >> $GITHUB_ENV
+          HOST_IP=$(hostname -I | awk '{print $1}')
+          echo "HTTP_PROXY=http://$HOST_IP:8080" >> $GITHUB_ENV
+          echo "HTTPS_PROXY=http://$HOST_IP:8080" >> $GITHUB_ENV
+          # echo "HTTP_PROXY=http://${{ steps.ip.outputs.ipv4 }}:8080" >> $GITHUB_ENV
+          # echo "HTTPS_PROXY=http://${{ steps.ip.outputs.ipv4 }}:8080" >> $GITHUB_ENV
           # echo "HTTP_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
           # echo "HTTPS_PROXY=http://127.0.0.1:8080" >> $GITHUB_ENV
       
@@ -79,7 +82,7 @@ jobs:
           echo $CA >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
           echo "Testing with curl using proxy"
-          # curl --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem https://jsonplaceholder.typicode.com/todos/1 | jq 
+          curl --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem https://jsonplaceholder.typicode.com/todos/1 | jq 
           # echo "Set npm config"
           # npm config set strict-ssl false
           # npm config set https-proxy http://127.0.0.1:8080
