@@ -13,7 +13,7 @@ ENV CA=${CA}
 RUN npm config set registry http://registry.npmjs.org/
 RUN npm config set strict-ssl false
 RUN npm config set proxy ${HTTP_PROXY}
-RUN npm config set https-proxt ${HTTPS_PROXY}
+RUN npm config set https-proxy ${HTTPS_PROXY}
 RUN npm config set ca ${CA}
 RUN npm ci
 
